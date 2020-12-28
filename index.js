@@ -17,14 +17,14 @@ if (workdays.includes(today)) {
   hours = [7, 8, 11];
 }
 
-for (let count = 0; count < hours.length - 1; count++) {
-  if (hours[count] < date.getHours) {
-    let hoursIndex;
-    while ((hoursIndex = hours.indexOf(date.getHours())) > -1) {
-      hours.splice(hoursIndex, 1);
-    }
-  }
-}
+// for (let x = 0; x < hours.length; x++) {
+//  if (hours[x] < date.getHours()) {
+//    let hoursIndex;
+//    while ((hoursIndex = hours.indexOf(hours[x])) > -1) {
+//      hours.splice(hoursIndex, 1);
+//    }
+//  }
+// }
 
 setInterval(function () {
   date = new Date();
