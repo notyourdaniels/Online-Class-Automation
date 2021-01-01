@@ -1,0 +1,8 @@
+[
+    {
+        "userName": "Felia",
+        "meetingLink": "zoommtg://zoom.us/join?confno=2655082921&pwd=kelas1a",
+        "alarmSound": "../sound/alarm-changesub.wav",
+        "silentMode": false
+    }
+]

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Online School Automator</title>
+  <link rel="stylesheet" href="index.css">
+
+</head>
+
+<body>
+  <h1 id="subjectCount" onload="coba1"></h1>
+  <div id="subjectRemaining">Subject remaining...</div>
+  <div id="nextSubject">
+    Next Subject :
+    <div id:subjectName></div>
+    <div id:subjectTime></div>
+  </div>
+
+
+
+  <footer>
+    <button onclick="quitApp()">Quit</button>
+  </footer>
+  <script>
+    //Required pkg
+    const electron = require('electron');
+    const { ipcRenderer } = electron;
+
+    //Checking total subject left
+    ipcRenderer.on('subjectLeft', (event, data) => {
+      document.getElementById("subjectCount").innerHTML = data
+    })
+
+    //QuitApp Handler
+    let quitApp = (event) => {
+      ipcRenderer.send('quitApp')
+    }
+
+
+  </script>
+</body>
+
+</html>

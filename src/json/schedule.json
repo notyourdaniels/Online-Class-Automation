@@ -1,0 +1,135 @@
+[
+    {
+        "day": "Monday",
+        "listSubject": [
+            {
+                "subjectNumber": 1,
+                "subjectName": "English",
+                "subjectStart": "07.20",
+                "subjectEnd": "08.00"
+            },
+            {
+                "subjectNumber": 2,
+                "subjectName": "Math",
+                "subjectStart": "08.20",
+                "subjectEnd": "09.00"
+            },
+            {
+                "subjectNumber": 3,
+                "subjectName": "Tematik",
+                "subjectStart": "09.20",
+                "subjectEnd": "10.00"
+            },
+            {
+                "subjectNumber": 4,
+                "subjectName": "Sport",
+                "subjectStart": "10.20",
+                "subjectEnd": "11.00"
+            }
+        ]
+    },
+    {
+        "day": "Tuesday",
+        "listSubject": [
+            {
+                "subjectNumber": 1,
+                "subjectName": "Mandarin",
+                "subjectStart": "07.20",
+                "subjectEnd": "08.00"
+            },
+            {
+                "subjectNumber": 2,
+                "subjectName": "Math",
+                "subjectStart": "08.20",
+                "subjectEnd": "09.00"
+            },
+            {
+                "subjectNumber": 3,
+                "subjectName": "Tematik",
+                "subjectStart": "09.20",
+                "subjectEnd": "10.00"
+            },
+            {
+                "subjectNumber": 4,
+                "subjectName": "Agama",
+                "subjectStart": "10.20",
+                "subjectEnd": "11.00"
+            }
+        ]
+    },
+    {
+        "day": "Wednesday",
+        "listSubject": [
+            {
+                "subjectNumber": 1,
+                "subjectName": "Science",
+                "subjectStart": "07.20",
+                "subjectEnd": "08.00"
+            },
+            {
+                "subjectNumber": 2,
+                "subjectName": "Math",
+                "subjectStart": "08.20",
+                "subjectEnd": "09.00"
+            },
+            {
+                "subjectNumber": 3,
+                "subjectName": "Tematik",
+                "subjectStart": "09.20",
+                "subjectEnd": "10.00"
+            },
+            {
+                "subjectNumber": 4,
+                "subjectName": "B.Indonesia",
+                "subjectStart": "10.20",
+                "subjectEnd": "11.00"
+            }
+        ]
+    },
+    {
+        "day": "Thursday",
+        "listSubject": [
+            {
+                "subjectNumber": 1,
+                "subjectName": "English",
+                "subjectStart": "07.20",
+                "subjectEnd": "08.00"
+            },
+            {
+                "subjectNumber": 2,
+                "subjectName": "Math",
+                "subjectStart": "08.20",
+                "subjectEnd": "09.00"
+            },
+            {
+                "subjectNumber": 3,
+                "subjectName": "Math",
+                "subjectStart": "09.20",
+                "subjectEnd": "10.00"
+            },
+            {
+                "subjectNumber": 4,
+                "subjectName": "Tematik",
+                "subjectStart": "10.20",
+                "subjectEnd": "11.00"
+            }
+        ]
+    },
+    {
+        "day": "Friday",
+        "listSubject": [
+            {
+                "subjectNumber": 1,
+                "subjectName": "Math",
+                "subjectStart": "07.20",
+                "subjectEnd": "08.00"
+            },
+            {
+                "subjectNumber": 2,
+                "subjectName": "Tematik",
+                "subjectStart": "08.20",
+                "subjectEnd": "09.00"
+            }
+        ]
+    }
+]
