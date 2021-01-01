@@ -1,7 +1,16 @@
+//Online Class Automation
+//By notyourdaniels 
+//Please credit me if you want to use this source code
+//2021 dnyworks (notyourdaniels)
+
+//Electron code
+
 const electron = require('electron');
 const path = require('path');
+const { runtime } = require('./engine.js');
 const { app, BrowserWindow, ipcMain} = electron;
 const engine = require('./engine.js')
+
 
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -13,7 +22,7 @@ const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 400,
-    height: 500,
+    height: 600,
     frame: false,
     resizable: false,
     webPreferences: {
@@ -30,13 +39,23 @@ const createWindow = () => {
   //dummy subjectCount
   
   setInterval(() => {
-    mainWindow.webContents.send('coba1', a)
-    
-
-
+    let runtime = engine.runtime()
+    if (runtime === "breaktime"){
+      mainWindow.webContents.send('subName', "Break Time")
+      mainWindow.webContents.send('subTime', " ")
+    } else if (runtime === "notyet"){
+      app.exit() //Future updates : add the info window
+    } else if (Array.isArray(runtime)){
+      let runtimeInfo = runtime
+      mainWindow.webContents.send('subCount', runtimeInfo[0])
+      mainWindow.webContents.send('subName', runtimeInfo[1].subject)
+      mainWindow.webContents.send('subTime', runtimeInfo[1].subjectTime)
+      mainWindow.webContents.send('nsubName', runtimeInfo[2].subject)
+      mainWindow.webContents.send('nsubTime', runtimeInfo[2].subjectTime)
+    }
   }, 1000)
 
-  
+
 };
 
 // This method will be called when Electron has finished

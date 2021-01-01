@@ -1,12 +1,16 @@
+//Online Class Automation Main Engine
+//By notyourdaniels 
+//Please credit me if you want to use this source code
+//2021 dnyworks (notyourdaniels)
+
 const opn = require("better-opn");  //For opening links
 const sound = require("sound-play");  //For playing sounds
 const path = require("path");  //Reading file path ?
-const fs = require('fs');  //JSON Reader
 const exec = require('child_process').exec; //Executor for process checker
 
 //Parsing JSON from .json files
-const schedule = JSON.parse(fs.readFileSync('json/schedule.json', 'utf8')); //Schedules
-const userConfig = JSON.parse(fs.readFileSync('json/config.json', 'utf8')); //User config
+const schedule = require('./json/schedule.json', 'utf8'); //Schedules
+const userConfig = require('./json/config.json', 'utf8'); //User config
 
 let date = new Date(); //Generating new date
 let today = date.getDay(); //Generating "today" day, numeric styles
@@ -39,7 +43,7 @@ let dayChecker = () => {
 }
 
 
-//generate current time
+//generate current time with hh:mm format
 let thisTime = () =>{
   var date = new Date();
     var h = date.getHours(); 
@@ -53,25 +57,65 @@ let thisTime = () =>{
     return `${h}.${m}`
 }
 
-let subjectCountdown = () =>{
+//checking it's time to run this app or not
+let runtime = () =>{
   let subject = dayChecker()
-  if (subject[0].subjectStart <= thisTime() && subject[subject.length - 1].subjectEnd > thisTime()){
-    console.log("it works")
+  let totalSubject = subject.length
+  //Validate schedule time.
+  if (subject[0].subjectStart <= thisTime() && subject[totalSubject - 1].subjectEnd > thisTime()){
+    //Validate schedule time between subject
+    for (let counter = 0; counter < schedule.length; counter++){
+      //If statement for detecting which subject the program should execute
+      if (subject[counter].subjectStart <= thisTime() && subject[counter].subjectEnd > thisTime()){
+        
+        //Statement for clearing next subject in the last subject
+        let nextSub
+        let nextSubTime
+        if (counter === totalSubject - 1){
+          nextSub = "nothing"
+          nextSubTime = null
+        } else if (counter != totalSubject){
+          nextSub = subject[counter + 1].subjectName
+          nextSubTime = `${subject[counter + 1].subjectStart} - ${subject[counter + 1].subjectEnd}`
+        }
+        
+        //return statement
+        return [totalSubject - subject[counter].subjectNumber, //subject left
+        { //Subject in progress
+          subject: subject[counter].subjectName,
+          subjectTime: `${subject[counter].subjectStart} - ${subject[counter].subjectEnd}`
+        },
+        { //Next Subject
+          subject: nextSub,
+          subjectTime: nextSubTime
+        },
+        ];
+      } else if (subject[counter].subjectEnd <= thisTime() && subject[counter + 1].subjectStart > thisTime()) {
+        //giving information about breaktime 
+        return "breaktime"
+      }
+    } 
+    //if the schedule is not yet started / has already ended.
+  } else{
+    return "notyet";
   }
 }
 
-//Open zoom app via browser link and giving alarm.
+
+
+//Open your apps of choice via link (zoom / google meet) and play some alarm
 let executor = () =>{
+  //Checking about silentMode is turned on or not on config.json
   if (userConfig[0].silentMode === false){
-    sound.play(path.resolve(__dirname, userConfig[0].alarmSound)); //Giving alarm
+    sound.play(path.resolve(__dirname, userConfig[0].alarmSound)); //playing alarm
   }
-  opn(userConfig[0].meetingLink); //Open apps link
+  opn(userConfig[0].meetingLink); //Open app link
 }
 
 //Exporting modules so it can used on index.js or whatever where you want to using it
 module.exports = {
   thisTime: thisTime,
   dayChecker: dayChecker,
-  subjectCountdown: subjectCountdown,
+  runtime: runtime,
   executor: executor
 }

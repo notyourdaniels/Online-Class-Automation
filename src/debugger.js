@@ -1,6 +1,8 @@
-
-//How to receive module 101
+//For Debugging only !
 const engine = require('./engine.js')
 
-console.log(engine.thisTime())
-console.log(engine.subjectCountdown())
+
+setInterval(() =>{
+    console.log(engine.runtime())
+}, 1000)
+

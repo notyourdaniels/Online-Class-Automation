@@ -1,3 +1,9 @@
+<!--Online Class Automation HTML file
+For electron engine
+By notyourdaniels 
+Please credit me if you want to use this source code
+2021 dnyworks (notyourdaniels) -->
+
 <!DOCTYPE html>
 <html>
 
@@ -9,12 +15,17 @@
 </head>
 
 <body>
-  <h1 id="subjectCount" onload="coba1"></h1>
+  <h1 id="subjectCount" onload="subCount"></h1>
   <div id="subjectRemaining">Subject remaining...</div>
+  <div id="nowSubject">
+    In progress :
+    <div id="subjectName" onload="subName"></div>
+    <div id="subjectTime" onload="subTime"></div>
+  </div>
   <div id="nextSubject">
     Next Subject :
-    <div id:subjectName></div>
-    <div id:subjectTime></div>
+    <div id="nsubjectName" onload="nsubName"></div>
+    <div id="nsubjectTime" onload="nsubTime"></div>
   </div>
 
 
@@ -27,9 +38,30 @@
     const electron = require('electron');
     const { ipcRenderer } = electron;
 
-    //Checking total subject left
-    ipcRenderer.on('subjectLeft', (event, data) => {
+    //count subject left
+    ipcRenderer.on('subCount', (event, data) => {
       document.getElementById("subjectCount").innerHTML = data
+    })
+
+    //Show now subject name
+    ipcRenderer.on('subName', (event, data) => {
+      document.getElementById("subjectName").innerHTML = data
+    })
+
+    //Show now subject time
+    ipcRenderer.on('subTime', (event, data) => {
+      document.getElementById("subjectTime").innerHTML = data
+    })
+
+
+    //Show next subject name
+    ipcRenderer.on('nsubName', (event, data) => {
+      document.getElementById("nsubjectName").innerHTML = data
+    })
+
+    //Show next subject time
+    ipcRenderer.on('nsubTime', (event, data) => {
+      document.getElementById("nsubjectTime").innerHTML = data
     })
 
     //QuitApp Handler

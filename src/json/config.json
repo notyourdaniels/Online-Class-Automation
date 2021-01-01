@@ -1,7 +1,7 @@
 [
     {
-        "userName": "Felia",
-        "meetingLink": "zoommtg://zoom.us/join?confno=2655082921&pwd=kelas1a",
+        "userName": "Debug",
+        "meetingLink": "https://www.google.com",
         "alarmSound": "../sound/alarm-changesub.wav",
         "silentMode": false
     }
