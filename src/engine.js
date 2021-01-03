@@ -36,7 +36,6 @@ let dayChecker = () => {
       if (dayName[today].includes(schedule[counter].day)){
       return schedule[counter].listSubject
       } 
-      return schedule[2].listSubject
   }
 }
 
@@ -52,8 +51,7 @@ let thisTime = () =>{
     m = (m < 10) ? "0" + m : m;
     s = (s < 10) ? "0" + s : s;
     
-    // return `${h}.${m}`
-    return "06.00"
+    return `${h}.${m}`
 }
 
 //Calculate time in seconds

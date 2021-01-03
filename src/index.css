@@ -11,7 +11,7 @@ html,body{
   text-align: center;
   place-items: center;
   background: #dde6f0;
-  font-size: 15px;
+  font-size: 16px;
   -webkit-app-region: drag;
 }
 
@@ -24,13 +24,23 @@ h1{
   
 }
 
-#subjectRemaining{
+#nowSubject{
+  margin-top: 30px;
+}
 
+#nowSubject #subjectName, #subjectTime{
+  font-weight: bold;
+  font-size: 20px;
+}
+
+#nextSubject{
+  margin-top: 30px;
+  font-size: 16px;
+  color: #2D3436
 }
 
 footer{
-  margin-top: 80px;
-  align-self: flex-end;
+  margin-top: 20px;
 }
 button{
   padding: 1em 3em;
@@ -49,4 +59,10 @@ button:hover{
   background:#BB2224;
   -webkit-app-region: no-drag;
   color: #fff;
+}
+
+#credit{
+  margin-top: 30px;
+  font-size: 10px;
+  color: #b2bec3
 }

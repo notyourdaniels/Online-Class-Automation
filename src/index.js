@@ -17,7 +17,8 @@ const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 400,
-    height: 600,
+    height: 680,
+    icon: path.join(__dirname, './images/icons.ico'),
     frame: false,
     resizable: false,
     webPreferences: {
@@ -91,7 +92,7 @@ app.on('activate', () => {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
 
-//catch quitApp
+//catch quitApp with msg box
 ipcMain.on('quitApp', () => {
   dialog.showMessageBox({  
     type: 'warning',
