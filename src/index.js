@@ -3,7 +3,7 @@
 const electron = require('electron');
 const path = require('path');
 const { runtime, calculateTime } = require('./engine.js');
-const { app, BrowserWindow, ipcMain} = electron;
+const { app, BrowserWindow, ipcMain, dialog} = electron;
 const engine = require('./engine.js')
 
 
@@ -34,13 +34,13 @@ const createWindow = () => {
   let canExecute = true
   setInterval(() => {
     let runtime = engine.runtime()
-    console.log(canExecute)
     if (runtime[0] === "breaktime"){
       mainWindow.webContents.send('subName', "Break Time")
       mainWindow.webContents.send('subTime', `${runtime[1]} - ${runtime[2]}`)
       canExecute = true
      
     } else if (runtime[0] === "notyet"){
+
       canExecute = true
       mainWindow.webContents.send('subCount', "empty")
       mainWindow.webContents.send('subName', "Not yet started")
@@ -93,5 +93,17 @@ app.on('activate', () => {
 
 //catch quitApp
 ipcMain.on('quitApp', () => {
-  app.exit()
+  dialog.showMessageBox({  
+    type: 'warning',
+      buttons: ['Yes', 'No'],
+      noLink: true,
+      defaultId: 1,
+      title: 'Online Class Automation',
+      message: 'Do you really want to quit ?',
+      detail: 'If you quit, this automation will be cancelled.',
+    }).then(res => {
+      if (res.response === 0){
+        app.quit()
+      }
+    }) 
 })
