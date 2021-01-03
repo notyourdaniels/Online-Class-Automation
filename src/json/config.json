@@ -1,6 +1,7 @@
 [
     {
         "userName": "Debug",
+        "meetingApp": "zoom.exe",
         "meetingLink": "https://www.google.com",
         "alarmSound": "../sound/alarm-changesub.wav",
         "silentMode": false

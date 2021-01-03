@@ -1,12 +1,9 @@
-//Online Class Automation Main Engine
-//By notyourdaniels 
-//Please credit me if you want to use this source code
-//2021 dnyworks (notyourdaniels)
+//Notyourdaniels on github
 
 const opn = require("better-opn");  //For opening links
 const sound = require("sound-play");  //For playing sounds
 const path = require("path");  //Reading file path ?
-const exec = require('child_process').exec; //Executor for process checker
+const exec = require('child_process').exec; //Process checker
 
 //Parsing JSON from .json files
 const schedule = require('./json/schedule.json', 'utf8'); //Schedules
@@ -57,6 +54,29 @@ let thisTime = () =>{
     return `${h}.${m}`
 }
 
+//Calculate time in seconds
+//For future use
+let calculateTime = (start, end) =>{
+  let timeStart = start.split(".")
+  let timeEnd = end.split(".")
+  let totalMinutes = ((timeEnd[0] - timeStart[0])*60)+(timeEnd[1] - timeStart[1])
+  return totalMinutes * 60
+}
+
+//Timer, show seconds remaining
+//For future use
+let timer = (start, end) => {
+  let time = calculateTime(start, end)
+  setInterval(() => {
+      if(time <= 0){
+          clearInterval(ticker);
+      } else {
+        console.log(time)
+      }
+      time -= 1;
+  }, 1000)
+}
+
 //checking it's time to run this app or not
 let runtime = () =>{
   let subject = dayChecker()
@@ -67,37 +87,37 @@ let runtime = () =>{
     for (let counter = 0; counter < schedule.length; counter++){
       //If statement for detecting which subject the program should execute
       if (subject[counter].subjectStart <= thisTime() && subject[counter].subjectEnd > thisTime()){
-        
         //Statement for clearing next subject in the last subject
         let nextSub
         let nextSubTime
         if (counter === totalSubject - 1){
-          nextSub = "nothing"
-          nextSubTime = null
+          nextSub = "-"
+          nextSubTime = "-"
         } else if (counter != totalSubject){
           nextSub = subject[counter + 1].subjectName
           nextSubTime = `${subject[counter + 1].subjectStart} - ${subject[counter + 1].subjectEnd}`
         }
         
         //return statement
-        return [totalSubject - subject[counter].subjectNumber, //subject left
+        return ["running", totalSubject - subject[counter].subjectNumber, //subject left
         { //Subject in progress
           subject: subject[counter].subjectName,
-          subjectTime: `${subject[counter].subjectStart} - ${subject[counter].subjectEnd}`
+          subjectTime: `${subject[counter].subjectStart} - ${subject[counter].subjectEnd}`,
         },
         { //Next Subject
           subject: nextSub,
           subjectTime: nextSubTime
         },
         ];
+
       } else if (subject[counter].subjectEnd <= thisTime() && subject[counter + 1].subjectStart > thisTime()) {
         //giving information about breaktime 
-        return "breaktime"
+        return ["breaktime", subject[counter].subjectEnd,  subject[counter + 1].subjectStart]
       }
     } 
     //if the schedule is not yet started / has already ended.
   } else{
-    return "notyet";
+    return ["notyet"];
   }
 }
 
@@ -117,5 +137,7 @@ module.exports = {
   thisTime: thisTime,
   dayChecker: dayChecker,
   runtime: runtime,
-  executor: executor
+  executor: executor,
+  timer: timer,
+  calculateTime: calculateTime
 }

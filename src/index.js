@@ -1,13 +1,8 @@
-//Online Class Automation
-//By notyourdaniels 
-//Please credit me if you want to use this source code
-//2021 dnyworks (notyourdaniels)
-
-//Electron code
+//Notyourdaniels on github
 
 const electron = require('electron');
 const path = require('path');
-const { runtime } = require('./engine.js');
+const { runtime, calculateTime } = require('./engine.js');
 const { app, BrowserWindow, ipcMain} = electron;
 const engine = require('./engine.js')
 
@@ -36,22 +31,35 @@ const createWindow = () => {
   // Open the DevTools.
   //mainWindow.webContents.openDevTools();
 
-  //dummy subjectCount
-  
+  let canExecute = true
   setInterval(() => {
     let runtime = engine.runtime()
-    if (runtime === "breaktime"){
+    console.log(canExecute)
+    if (runtime[0] === "breaktime"){
       mainWindow.webContents.send('subName', "Break Time")
-      mainWindow.webContents.send('subTime', " ")
-    } else if (runtime === "notyet"){
-      app.exit() //Future updates : add the info window
-    } else if (Array.isArray(runtime)){
-      let runtimeInfo = runtime
-      mainWindow.webContents.send('subCount', runtimeInfo[0])
-      mainWindow.webContents.send('subName', runtimeInfo[1].subject)
-      mainWindow.webContents.send('subTime', runtimeInfo[1].subjectTime)
-      mainWindow.webContents.send('nsubName', runtimeInfo[2].subject)
-      mainWindow.webContents.send('nsubTime', runtimeInfo[2].subjectTime)
+      mainWindow.webContents.send('subTime', `${runtime[1]} - ${runtime[2]}`)
+      canExecute = true
+     
+    } else if (runtime[0] === "notyet"){
+      canExecute = true
+      mainWindow.webContents.send('subCount', "empty")
+      mainWindow.webContents.send('subName', "Not yet started")
+      mainWindow.webContents.send('subTime', "-")
+      mainWindow.webContents.send('nsubName', "-")
+      mainWindow.webContents.send('nsubTime', "-")
+       //Future updates : add the info window
+
+    } else if (runtime[0] === "running"){
+      if (canExecute === true){
+        engine.executor()
+        canExecute = false
+      }
+
+      mainWindow.webContents.send('subCount', runtime[1])
+      mainWindow.webContents.send('subName', runtime[2].subject)
+      mainWindow.webContents.send('subTime', runtime[2].subjectTime)
+      mainWindow.webContents.send('nsubName', runtime[3].subject)
+      mainWindow.webContents.send('nsubTime', runtime[3].subjectTime)
     }
   }, 1000)
 
