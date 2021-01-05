@@ -4,10 +4,11 @@ const opn = require("better-opn");  //For opening links
 const sound = require("sound-play");  //For playing sounds
 const path = require("path");  //Reading file path ?
 const exec = require('child_process').exec; //Process checker
+const fs = require("fs")
 
 //Parsing JSON from .json files
-const schedule = require('./json/schedule.json', 'utf8'); //Schedules
-const userConfig = require('./json/config.json', 'utf8'); //User config
+const schedule = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'json/schedule.json'))); //Schedules
+const userConfig = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'json/config.json'))); //User config
 
 let date = new Date(); //Generating new date
 let today = date.getDay(); //Generating "today" day, numeric styles
