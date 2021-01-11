@@ -24,12 +24,11 @@
     <div id="nsubjectTime" onload="nsubTime">-</div>
   </div>
 
-
-
   <footer>
     <button onclick="quitApp()">Quit</button>
     <div id="credit">dnyworks / notyourdaniels</div>
   </footer>
+
   <script>
     //Required pkg
     const electron = require('electron');
@@ -54,7 +53,6 @@
       document.getElementById("subjectTime").innerHTML = data
     })
 
-
     //Show next subject name
     ipcRenderer.on('nsubName', (event, data) => {
       document.getElementById("nsubjectName").innerHTML = data
@@ -70,8 +68,6 @@
       ipcRenderer.send('quitApp')
 
     }
-
-
 
   </script>
 </body>
