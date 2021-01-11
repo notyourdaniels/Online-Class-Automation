@@ -3,7 +3,7 @@
         "userName": "Debug",
         "meetingApp": "zoom.exe",
         "meetingLink": "https://www.google.com",
-        "alarmSound": "../sound/alarm-changesub.wav",
+        "alarmSound": "./sound/ios_radar.mp3",
         "silentMode": false
     }
 ]

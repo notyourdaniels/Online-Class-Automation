@@ -128,7 +128,7 @@ let runtime = () =>{
 let executor = () =>{
   //Checking about silentMode is turned on or not on config.json
   if (userConfig[0].silentMode === false){
-    sound.play(path.resolve(__dirname, userConfig[0].alarmSound)); //playing alarm
+    sound.play(path.resolve(__dirname, userConfig[0].alarmSound), 100); //playing alarm
   }
   opn(userConfig[0].meetingLink); //Open app link
 }
